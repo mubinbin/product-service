@@ -39,6 +39,8 @@ public class ProductService {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
+                .createdAt(product.getCreatedAt())
+                .updatedAt(product.getUpdatedAt())
                 .build();
     }
 }
