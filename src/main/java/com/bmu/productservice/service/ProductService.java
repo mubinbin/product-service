@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     private final ProductRepository productRepository;
+
     public void createProduct(ProductRequest productRequest) {
         Product product = Product.builder()
                 .name(productRequest.getName())
@@ -24,11 +25,8 @@ public class ProductService {
                 .price(productRequest.getPrice())
                 .build();
 
-        productRepository.save(product);
+        productRepository.insert(product);
         log.info("Product {} is saved", product.getId());
-
-
-
     }
 
     public List<ProductResponse> getAllProducts() {
@@ -45,5 +43,15 @@ public class ProductService {
                 .createdAt(product.getCreatedAt())
                 .updatedAt(product.getUpdatedAt())
                 .build();
+    }
+
+    public void deleteProduct(String id) {
+        productRepository.deleteById(id);
+        log.info("Product {} is deleted", id);
+    }
+
+    public void deleteAll() {
+        productRepository.deleteAll();
+        log.info("Deleted all products successfully");
     }
 }
